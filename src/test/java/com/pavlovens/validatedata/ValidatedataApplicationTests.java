@@ -2,6 +2,7 @@ package com.pavlovens.validatedata;
 
 import com.pavlovens.validatedata.domain.CashManContract;
 import com.pavlovens.validatedata.domain.PublishedContract;
+import com.pavlovens.validatedata.validator.ContractValidatorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class ValidatedataApplicationTests {
 	@Qualifier("conversionService")
 	@Autowired
 	private ConversionService conversionService;
+	@Autowired
+	private ContractValidatorService contractValidatorService;
+
 
 	@Test
 	public void canConversionTest() {
@@ -44,6 +48,8 @@ public class ValidatedataApplicationTests {
        assertEquals("2222222",contract.getBankCodeCom());
        assertEquals("987654321",contract.getOrgAccountComNum());
 
+       assertEquals(0,contractValidatorService.validate(contract).size());
+
 	}
 
 	@Test
@@ -57,7 +63,8 @@ public class ValidatedataApplicationTests {
 		assertNull(contract.getBankCodeCom());
 		assertNull(contract.getOrgAccountComNum());
 
-
+		assertEquals(3,contractValidatorService.validate(contract).size());
+		System.out.println(contractValidatorService.validate(contract));
 
 	}
 }

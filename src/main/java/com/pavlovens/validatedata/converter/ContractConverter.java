@@ -11,9 +11,7 @@ public class ContractConverter implements Converter<PublishedContract,CashManCon
     @Override
     public CashManContract convert(PublishedContract publishedContract) {
         CashManContract contract = new CashManContract();
-        System.out.println(publishedContract);
-        System.out.println((Long)publishedContract.getDynamicParam(CM_AgreementId));
-        contract.setAgreementId(null);
+        contract.setAgreementId(publishedContract.getDynamicParam(CM_AgreementId));
         contract.setOrgId((publishedContract.getDynamicParam(CM_OrgId)));
         contract.setOrgType(publishedContract.getDynamicParam(CM_OrgType));
         contract.setBankBIC(publishedContract.getDynamicParam(CM_BankBIC));
