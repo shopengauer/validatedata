@@ -8,10 +8,10 @@ public class CashManContract {
 
 
     @NotNull
-    private long agreementId;
+    private Long agreementId;
 
     @NotNull
-    private long orgId;
+    private Long orgId;
 
     @NotEmpty
     private String orgType;
@@ -23,19 +23,19 @@ public class CashManContract {
     public CashManContract() {
     }
 
-    public long getAgreementId() {
+    public Long getAgreementId() {
         return agreementId;
     }
 
-    public void setAgreementId(long agreementId) {
+    public void setAgreementId(Long agreementId) {
         this.agreementId = agreementId;
     }
 
-    public long getOrgId() {
+    public Long getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(long orgId) {
+    public void setOrgId(Long orgId) {
         this.orgId = orgId;
     }
 

@@ -1,25 +1,18 @@
 package com.pavlovens.validatedata.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class PublishedContract {
 
-    private long id;
-    private Map<String,Object> dynamicParams;
+    private final Map<String,Object> dynamicParams = new HashMap<>();
 
-    public long getId() {
-        return id;
+    @SuppressWarnings("unchecked")
+    public <T> T getDynamicParam(ContractKeys key) {
+        return (T) dynamicParams.get(key.name());
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Map<String, Object> getDynamicParams() {
-        return dynamicParams;
-    }
-
-    public void setDynamicParams(Map<String, Object> dynamicParams) {
-        this.dynamicParams = dynamicParams;
+    public void setDynamicParam(ContractKeys key, Object value) {
+        dynamicParams.put(key.name(),value);
     }
 }

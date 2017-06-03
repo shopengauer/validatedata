@@ -11,12 +11,14 @@ public class ContractConverter implements Converter<PublishedContract,CashManCon
     @Override
     public CashManContract convert(PublishedContract publishedContract) {
         CashManContract contract = new CashManContract();
-        contract.setAgreementId((Long) publishedContract.getDynamicParams().get(CM_AgreementId.name()));
-        contract.setOrgId((Long) publishedContract.getDynamicParams().get(CM_OrgId.name()));
-        contract.setOrgType((String) publishedContract.getDynamicParams().get(CM_OrgType.name()));
-        contract.setBankBIC((String) publishedContract.getDynamicParams().get(CM_BankBIC.name()));
-        contract.setBankCodeCom((String) publishedContract.getDynamicParams().get(CM_BankCodeCom.name()));
-        contract.setOrgAccountComNum((String) publishedContract.getDynamicParams().get(CM_OrgAccountComNum.name()));
+        System.out.println(publishedContract);
+        System.out.println((Long)publishedContract.getDynamicParam(CM_AgreementId));
+        contract.setAgreementId(null);
+        contract.setOrgId((publishedContract.getDynamicParam(CM_OrgId)));
+        contract.setOrgType(publishedContract.getDynamicParam(CM_OrgType));
+        contract.setBankBIC(publishedContract.getDynamicParam(CM_BankBIC));
+        contract.setBankCodeCom(publishedContract.getDynamicParam(CM_BankCodeCom));
+        contract.setOrgAccountComNum(publishedContract.getDynamicParam(CM_OrgAccountComNum));
         return contract;
     }
 }
