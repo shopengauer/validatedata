@@ -1,5 +1,8 @@
 package com.pavlovens.validatedata.validator;
 
+import com.pavlovens.validatedata.domain.CashManContract;
+import com.pavlovens.validatedata.genericvalidator.BaseEntityValidator;
+import com.pavlovens.validatedata.genericvalidator.EntityValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -38,6 +41,11 @@ public class ValidatorConfig {
    @Bean
    public MethodValidationPostProcessor methodValidationPostProcessor(){
        return new MethodValidationPostProcessor();
+   }
+
+   @Bean
+   public EntityValidator<CashManContract> cashManContractValidator(){
+       return new BaseEntityValidator<>(validator());
    }
 
 }
