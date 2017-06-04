@@ -2,6 +2,8 @@ package com.pavlovens.validatedata;
 
 import com.pavlovens.validatedata.domain.CashManContract;
 import com.pavlovens.validatedata.domain.PublishedContract;
+import com.pavlovens.validatedata.validateexecutable.CommissionService;
+import com.pavlovens.validatedata.validateexecutable.ICommissionService;
 import com.pavlovens.validatedata.validator.ContractValidationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.validation.ConstraintViolationException;
 
 import static com.pavlovens.validatedata.domain.ContractKeys.*;
 import static org.junit.Assert.*;
@@ -24,6 +28,8 @@ public class ValidatedataApplicationTests {
 	private ConversionService conversionService;
 	@Autowired
 	private ContractValidationService contractValidationService;
+	@Autowired
+	private ICommissionService commissionService;
 
 
 	@Test
@@ -77,6 +83,25 @@ public class ValidatedataApplicationTests {
 		assertEquals(1, contractValidationService.validateContractValue("orgType",null).size());
 
 		System.out.println(contractValidationService.validateContract(contract));
+
+	}
+
+
+	@Test
+	public void methodParameterValidationTest(){
+		CashManContract contract = new CashManContract();
+		try{
+			commissionService.checkForCommission(null);
+		}catch (ConstraintViolationException e){
+			System.out.println(e.getConstraintViolations());
+		}
+
+		try{
+			commissionService.checkForCommission(contract);
+		}catch (ConstraintViolationException e){
+			System.out.println(e.getConstraintViolations());
+		}
+
 
 	}
 }
