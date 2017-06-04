@@ -93,13 +93,13 @@ public class ValidatedataApplicationTests {
 		try{
 			commissionService.checkForCommission(null);
 		}catch (ConstraintViolationException e){
-			System.out.println(e.getConstraintViolations());
+			e.getConstraintViolations().forEach(constraintViolation -> System.out.println(constraintViolation.getMessage()));
 		}
 
 		try{
 			commissionService.checkForCommission(contract);
 		}catch (ConstraintViolationException e){
-			System.out.println(e.getConstraintViolations());
+			e.getConstraintViolations().forEach(constraintViolation -> System.out.println(constraintViolation.getMessage()));
 		}
 
 
