@@ -10,4 +10,9 @@ public class CommissionService implements ICommissionService{
     public String checkForCommission(CashManContract contract) {
         return null;
     }
+
+    @Override
+    public void checkCashManContract(CashManContract contract) {
+        System.out.println("In method checkCashManContract");
+    }
 }

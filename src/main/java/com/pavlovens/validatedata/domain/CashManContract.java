@@ -1,8 +1,6 @@
 package com.pavlovens.validatedata.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
 

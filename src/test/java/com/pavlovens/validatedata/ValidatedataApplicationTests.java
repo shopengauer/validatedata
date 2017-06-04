@@ -104,4 +104,15 @@ public class ValidatedataApplicationTests {
 
 
 	}
+
+	@Test
+	public void validateCashManMethod() throws Exception {
+		CashManContract contract = new CashManContract();
+
+		try {
+			commissionService.checkCashManContract(contract);
+		} catch (ConstraintViolationException e) {
+			System.out.println(e.getConstraintViolations());
+		}
+	}
 }
