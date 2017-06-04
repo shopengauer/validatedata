@@ -2,7 +2,7 @@ package com.pavlovens.validatedata;
 
 import com.pavlovens.validatedata.domain.CashManContract;
 import com.pavlovens.validatedata.domain.PublishedContract;
-import com.pavlovens.validatedata.validator.ContractValidatorService;
+import com.pavlovens.validatedata.validator.ContractValidationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class ValidatedataApplicationTests {
 	@Autowired
 	private ConversionService conversionService;
 	@Autowired
-	private ContractValidatorService contractValidatorService;
+	private ContractValidationService contractValidationService;
 
 
 	@Test
@@ -48,7 +48,12 @@ public class ValidatedataApplicationTests {
        assertEquals("2222222",contract.getBankCodeCom());
        assertEquals("987654321",contract.getOrgAccountComNum());
 
-       assertEquals(0,contractValidatorService.validate(contract).size());
+       assertEquals(0, contractValidationService.validateContract(contract).size());
+       assertEquals(0, contractValidationService.validateContractProperty(contract,"agreementId").size());
+
+	   assertEquals(0, contractValidationService.validateContractValue("orgId",100L).size());
+	   assertEquals(0, contractValidationService.validateContractValue("orgType","Public").size());
+
 
 	}
 
@@ -63,8 +68,15 @@ public class ValidatedataApplicationTests {
 		assertNull(contract.getBankCodeCom());
 		assertNull(contract.getOrgAccountComNum());
 
-		assertEquals(3,contractValidatorService.validate(contract).size());
-		System.out.println(contractValidatorService.validate(contract));
+		assertEquals(3, contractValidationService.validateContract(contract).size());
+		assertEquals(1, contractValidationService.validateContractProperty(contract,"agreementId").size());
+		assertEquals(1, contractValidationService.validateContractProperty(contract,"orgId").size());
+		assertEquals(1, contractValidationService.validateContractProperty(contract,"orgType").size());
+
+		assertEquals(1, contractValidationService.validateContractValue("orgId",null).size());
+		assertEquals(1, contractValidationService.validateContractValue("orgType",null).size());
+
+		System.out.println(contractValidationService.validateContract(contract));
 
 	}
 }
