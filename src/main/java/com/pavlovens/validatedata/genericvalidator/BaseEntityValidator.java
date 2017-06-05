@@ -18,6 +18,11 @@ public class BaseEntityValidator<T> implements EntityValidator<T> {
     }
 
     @Override
+    public Set<ConstraintViolation<T>> validateGroup(T t, Class<?>... clazz) {
+        return validator.validate(t,clazz);
+    }
+
+    @Override
     public Set<ConstraintViolation<T>> validateProperty(T t, String propName) {
         return validator.validateProperty(t,propName);
     }
